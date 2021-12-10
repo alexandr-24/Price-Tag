@@ -33,13 +33,12 @@ namespace Price_Tag.Pages
         {
             try
             {
-                Manager.Settings settings = JsonConvert.DeserializeObject<Manager.Settings>(File.ReadAllText(@"F:\PetProjects\Price_Tag\settings.json"));
-                CompanyNameTB.Text = settings.CompanyName;
-                FileStreamTB.Text = settings.FileStreamString;
+                CompanyNameTB.Text = Manager.SettingsData.CompanyName;
+                FileStreamTB.Text = Manager.SettingsData.FileStreamString;
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -59,6 +58,7 @@ namespace Price_Tag.Pages
         {
             Manager.Settings settings = new Manager.Settings { CompanyName = CompanyNameTB.Text, FileStreamString = FileStreamTB.Text };
             File.WriteAllText(@"F:\PetProjects\Price_Tag\settings.json", JsonConvert.SerializeObject(settings));
+            Manager.SettingsData = new Manager.Settings() { CompanyName = settings.CompanyName, FileStreamString = settings.FileStreamString };
             MessageBox.Show("Данные сохранены");
         }
     }

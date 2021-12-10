@@ -27,7 +27,7 @@
                 <Image Source="Icons/Home.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        <Button x:Name="AddButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="1" Grid.Column="0">
+        <Button x:Name="ProductsButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="1" Grid.Column="0" Click="ProductsButton_Click">
             <StackPanel>
                 <Image Source="Icons/DB.png" StretchDirection="DownOnly"/>
             </StackPanel>

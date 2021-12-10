@@ -8,7 +8,7 @@ namespace Price_Tag.Classes
 {
     internal class Product_Class
     {
-        class Product
+        public class Product
         {
             public int ID { get; set; }
             public string ProductName { get; set; }
@@ -16,5 +16,6 @@ namespace Price_Tag.Classes
             public string ProductType { get; set; }
             public string ProductBarcode { get; set; }
         }
+        public static List<Product> ProductsList { get; set; }
     }
 }

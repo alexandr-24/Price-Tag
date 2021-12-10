@@ -93,6 +93,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +108,9 @@
     </Compile>
     <Compile Include="Pages\PrintPage.xaml.cs">
       <DependentUpon>PrintPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProductsPage.xaml.cs">
+      <DependentUpon>ProductsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -144,28 +151,13 @@
     <Resource Include="Icons\Settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Print.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icons\Info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Info.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\DB.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="DB.png" />
+    <Resource Include="Icons\Import.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
