@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Price_Tag"
         mc:Ignorable="d"
-        Title="Печать ценников" Height="700" Width="1100">
+        Title="Печать ценников" Height="700" Width="1100" MinHeight="700" MinWidth="1100">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -20,33 +20,34 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" Background="LightGray"/>
+        <Frame x:Name="SelectedButtonFrame" Grid.Column="0" Grid.Row="0" Background="#FF7E00DC"/>
 
-        <Button x:Name="HomeButton" Grid.Row="0" Grid.Column="0">
+        <Button x:Name="HomeButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="0" Grid.Column="0" Click="HomeButton_Click">
             <StackPanel>
-                <Image Source="/Home.png" StretchDirection="DownOnly"/>
+                <Image Source="Icons/Home.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        <Button x:Name="AddButton" Grid.Row="1" Grid.Column="0">
+        <Button x:Name="AddButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="1" Grid.Column="0">
             <StackPanel>
-                <Image Source="/Add.png" StretchDirection="DownOnly"/>
+                <Image Source="Icons/DB.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        <Button x:Name="PrintButton" Grid.Row="2" Grid.Column="0">
+        <Button x:Name="PrintButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="2" Grid.Column="0">
             <StackPanel>
-                <Image Source="/Print.png" StretchDirection="DownOnly"/>
+                <Image Source="Icons/Print.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        <Button x:Name="SettingsButton" Grid.Row="3" Grid.Column="0">
+        <Button x:Name="SettingsButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="3" Grid.Column="0" Click="SettingsButton_Click">
             <StackPanel>
-                <Image Source="/Settings.png" StretchDirection="DownOnly"/>
+                <Image Source="Icons/Settings.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        <Button x:Name="InfoButton" Grid.Row="6" Grid.Column="0">
+        <Button x:Name="InfoButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="6" Grid.Column="0">
             <StackPanel>
-                <Image Source="/Info.png" StretchDirection="DownOnly"/>
+                <Image Source="Icons/Info.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        
-        <Frame x:Name="MainFrame" Grid.Row="0" Grid.Column="1" Grid.RowSpan="6"/>
+
+        <Frame x:Name="MainFrame" Grid.Row="0" Grid.Column="1" Grid.RowSpan="6" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 
 using Price_Tag.Classes;
+using Price_Tag.Pages;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -32,6 +33,17 @@ namespace Price_Tag
         {
             InitializeComponent();
             Manager.MainFrame = MainFrame;
+            Manager.MainFrame.Content = new HomePage();
+        }
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Content = new HomePage();
+            Grid.SetRow(SelectedButtonFrame, 0);
+        }
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Content = new SettingsPage();
+            Grid.SetRow(SelectedButtonFrame, 3);
         }
     }
 }
