@@ -78,6 +78,11 @@ namespace Price_Tag
             Manager.MainFrame.Content = new ProductsPage();
             Grid.SetRow(SelectedButtonFrame, 1);
         }
+        private void PrintButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Content = new PrintPage();
+            Grid.SetRow(SelectedButtonFrame, 2);
+        }
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Content = new SettingsPage();

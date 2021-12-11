@@ -48,5 +48,8 @@
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="24"/>
         </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+        </Style>
     </Application.Resources>
 </Application>

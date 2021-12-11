@@ -32,7 +32,7 @@
                 <Image Source="Icons/DB.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        <Button x:Name="PrintButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="2" Grid.Column="0">
+        <Button x:Name="PrintButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="2" Grid.Column="0" Click="PrintButton_Click">
             <StackPanel>
                 <Image Source="Icons/Print.png" StretchDirection="DownOnly"/>
             </StackPanel>
