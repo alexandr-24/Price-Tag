@@ -12,5 +12,12 @@
     "ProductCost": "50.00",
     "ProductType": "Цена за шт.",
     "ProductBarcode": "3858888677633"
+  },
+  {
+    "ID": 3,
+    "ProductName": "Вода Bon Aqua, 0.5л",
+    "ProductCost": "48.00",
+    "ProductType": "Цена за шт.",
+    "ProductBarcode": "40822426"
   }
 ]

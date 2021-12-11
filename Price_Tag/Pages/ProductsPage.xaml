@@ -15,9 +15,9 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="75"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <Label Content="Товары" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3"/>
         
@@ -28,11 +28,22 @@
                 <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Цена" Binding="{Binding ProductCost}"/>
                 <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Тип" Binding="{Binding ProductType}"/>
                 <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Штрих-код" Binding="{Binding ProductBarcode}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="Edit_Button" Style="{StaticResource ControlButtonStyle}" Margin="5,5" Click="Edit_Button_Click">
+                                <StackPanel>
+                                    <Image Source="../Icons/Edit.png" StretchDirection="DownOnly"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
 
         </DataGrid>
 
-        <Button x:Name="AddButton" Grid.Row="3" Grid.Column="0" Margin="10,10" Style="{StaticResource ControlButtonStyle}">
+        <Button x:Name="AddButton" Grid.Row="3" Grid.Column="0" Margin="10,10" Style="{StaticResource ControlButtonStyle}" Click="AddButton_Click">
             <StackPanel>
                 <Image Source="../Icons/Add.png" StretchDirection="DownOnly"/>
             </StackPanel>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Price_Tag.Classes
 {
-    internal class Product_Class
+    public class Product_Class
     {
         public class Product
         {

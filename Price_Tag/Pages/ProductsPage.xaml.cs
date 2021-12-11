@@ -31,5 +31,15 @@ namespace Price_Tag.Pages
         {
             DG.ItemsSource = Product_Class.ProductsList;
         }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Content = new AddEditProductsPage(null);
+        }
+
+        private void Edit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Content = new AddEditProductsPage((sender as Button).DataContext as Product_Class.Product);
+        }
     }
 }
