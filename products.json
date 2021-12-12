@@ -1,23 +1,23 @@
 [
   {
     "ID": 1,
-    "ProductName": "РљРѕРЅС„РµС‚С‹ Milka, РёР· РјРѕР»РѕС‡РЅРѕРіРѕ С€РѕРєРѕР»Р°РґР°, СЃ РѕСЂРµС…РѕРІРѕР№ РЅР°С‡РёРЅРєРѕР№, 110 Рі",
+    "ProductName": "Конфеты Milka, из молочного шоколада, с ореховой начинкой, 110 г",
     "ProductCost": "139.00",
-    "ProductType": "Р¦РµРЅР° Р·Р° С€С‚.",
+    "ProductType": "Цена за шт.",
     "ProductBarcode": "7622201105518"
   },
   {
     "ID": 2,
-    "ProductName": "РњРѕСЂРѕР¶РµРЅРѕРµ Р‘РѕРЅ РџР°СЂРё Р”Р¶Р°РЅРіР»Рё Р±Р°РЅР°РЅ 45 РјР»",
+    "ProductName": "Мороженое Бон Пари Джангли банан 45 мл",
     "ProductCost": "50.00",
-    "ProductType": "Р¦РµРЅР° Р·Р° С€С‚.",
+    "ProductType": "Цена за шт.",
     "ProductBarcode": "3858888677633"
   },
   {
     "ID": 3,
-    "ProductName": "Р’РѕРґР° Bon Aqua, 0.5Р»",
+    "ProductName": "Вода Bon Aqua, 0.5л",
     "ProductCost": "48.00",
-    "ProductType": "Р¦РµРЅР° Р·Р° С€С‚.",
+    "ProductType": "Цена за шт.",
     "ProductBarcode": "40822426"
   }
 ]

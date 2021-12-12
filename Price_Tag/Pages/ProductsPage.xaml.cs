@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Newtonsoft.Json;
 using Price_Tag.Classes;
 
 namespace Price_Tag.Pages
@@ -29,7 +30,7 @@ namespace Price_Tag.Pages
         }
         private void UpdateDG()
         {
-            DG.ItemsSource = Product_Class.ProductsList;
+            DG.ItemsSource = Product_Class.ProductsList.ToList();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +41,30 @@ namespace Price_Tag.Pages
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Content = new AddEditProductsPage((sender as Button).DataContext as Product_Class.Product);
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var productsToRemove = DG.SelectedItems.Cast<Product_Class.Product>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {productsToRemove.Count()} элементов?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    for (int i = 0; i < productsToRemove.Count; i++)
+                    {
+                        Product_Class.ProductsList.Remove(productsToRemove[i]);
+                    }
+                    File.WriteAllText(@"F:\PetProjects\Price_Tag\products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
+                    UpdateDG();
+                    MessageBox.Show("Продукты удалены!");
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                
+            }
         }
     }
 }

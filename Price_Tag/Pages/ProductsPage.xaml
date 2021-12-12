@@ -53,7 +53,7 @@
                 <Image Source="../Icons/Import.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        <Button x:Name="DeleteButton" Grid.Row="3" Grid.Column="2" Margin="10,10" Style="{StaticResource ControlButtonStyle}">
+        <Button x:Name="DeleteButton" Grid.Row="3" Grid.Column="2" Margin="10,10" Style="{StaticResource ControlButtonStyle}" Click="DeleteButton_Click">
             <StackPanel>
                 <Image Source="../Icons/Delete.png" StretchDirection="DownOnly"/>
             </StackPanel>
