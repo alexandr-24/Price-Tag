@@ -146,7 +146,31 @@ namespace Price_Tag.Pages
                         document.Add(barcode);
 
                         cb.SetFontAndSize(bf, 10);
-                        cb.ShowTextAligned(1, productsToPrintsList[r].ProductName, 208 * i + 110, document.PageSize.Height - 35 - 166 * k, 0);
+                        string line1 = "";
+                        string line2 = "";
+                        if (productsToPrintsList[r].ProductName.Length > 30)
+                        {
+                            int lastEnter = 0;
+                            for (int j = 0; j < 35; j++)
+                            {
+                                if (productsToPrintsList[r].ProductName[j] == ' ')
+                                {
+                                    lastEnter = j;
+                                }
+                            }
+                            for (int j = 0; j < lastEnter; j++)
+                            {
+                                line1 += productsToPrintsList[r].ProductName[j];
+                            }
+                            while (lastEnter < productsToPrintsList[r].ProductName.Length)
+                            {
+                                line2 += productsToPrintsList[r].ProductName[lastEnter];
+                                lastEnter++;
+                            }
+                        }
+                        
+                        cb.ShowTextAligned(1, line1, 208 * i + 110, document.PageSize.Height - 35 - 166 * k, 0);
+                        cb.ShowTextAligned(1, line2, 208 * i + 110, document.PageSize.Height - 50 - 166 * k, 0);
                         cb.SetFontAndSize(bf, 24);
                         cb.ShowTextAligned(1, productsToPrintsList[r].ProductCost + " руб.", 208 * i + 109, document.PageSize.Height - 83 - 166 * k, 0);
                         cb.SetFontAndSize(bf, 8);
