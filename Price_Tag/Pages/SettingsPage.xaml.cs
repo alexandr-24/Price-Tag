@@ -57,7 +57,7 @@ namespace Price_Tag.Pages
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Manager.Settings settings = new Manager.Settings { CompanyName = CompanyNameTB.Text, FileStreamString = FileStreamTB.Text };
-            File.WriteAllText(@"F:\PetProjects\Price_Tag\settings.json", JsonConvert.SerializeObject(settings));
+            File.WriteAllText(@"settings.json", JsonConvert.SerializeObject(settings));
             Manager.SettingsData = new Manager.Settings() { CompanyName = settings.CompanyName, FileStreamString = settings.FileStreamString };
             MessageBox.Show("Данные сохранены");
         }

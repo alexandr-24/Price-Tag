@@ -13,24 +13,30 @@
             <RowDefinition Height="75"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <Label Content="Печать ценников" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         
-        <Label Content="Название товара:" Grid.Row="1" Margin="10,10"/>
+        <Label Content="Поиск товара:" Grid.Row="1" Margin="10,10"/>
         <TextBox x:Name="ProductNameTB" Grid.Row="1" VerticalAlignment="Bottom" Margin="10,10"/>
-        
-        <DataGrid x:Name="DG" Grid.Row="2" Margin="10,10"/>
 
-        <Label Content="Количество:" Grid.Row="3" Margin="10,10"/>
-        <TextBox x:Name="ProductCountTB" Grid.Row="3" VerticalAlignment="Bottom" Margin="10,10,55.5,10"/>
-        <Button x:Name="AddButton" Style="{StaticResource ControlButtonStyle}" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10" Height="35.5" Width="35.5">
-            <StackPanel>
-                <Image Source="../Icons/Add.png" StretchDirection="DownOnly"/>
-            </StackPanel>
-        </Button>
+        <DataGrid x:Name="DG" Grid.Row="2" Margin="10,10"  FontSize="18" FontFamily="Comic Sans MS" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding isSelected}">
+                    <DataGridCheckBoxColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="checkAll" IsChecked="False" Checked="checkAll_Checked" Unchecked="checkAll_Unchecked"/>
+                        </DataTemplate>
+                    </DataGridCheckBoxColumn.HeaderTemplate>
+                </DataGridCheckBoxColumn>
+                <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Количество" Binding="{Binding Count}"/>
+                <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Код" Binding="{Binding ID}" IsReadOnly="True"/>
+                <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Название продукта" Width="1*" Binding="{Binding ProductName}" IsReadOnly="True"/>
+                <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Цена" Binding="{Binding ProductCost}" IsReadOnly="True"/>
+                <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Тип" Binding="{Binding ProductType}" IsReadOnly="True"/>
+                <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Штрих-код" Binding="{Binding ProductBarcode}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
         <Button Style="{StaticResource ControlButtonStyle}" Grid.Row="5" Grid.Column="0" FontSize="32" VerticalAlignment="Center" Click="Button_Click" HorizontalAlignment="Stretch" Margin="10,10">
             <StackPanel>

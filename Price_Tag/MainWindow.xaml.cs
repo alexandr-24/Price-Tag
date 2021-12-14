@@ -39,7 +39,7 @@ namespace Price_Tag
             // Загрузка названия компании и путь к сохранению файла
             try
             {
-                Manager.Settings settings = JsonConvert.DeserializeObject<Manager.Settings>(File.ReadAllText(@"F:\PetProjects\Price_Tag\settings.json"));
+                Manager.Settings settings = JsonConvert.DeserializeObject<Manager.Settings>(File.ReadAllText(@"settings.json"));
                 Manager.SettingsData = new Manager.Settings() { CompanyName = settings.CompanyName, FileStreamString = settings.FileStreamString };
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace Price_Tag
             // Загрузка продуктов
             try
             {
-                List<Product_Class.Product> p = JsonConvert.DeserializeObject<List<Product_Class.Product>>(File.ReadAllText(@"F:\PetProjects\Price_Tag\products.json"));
+                List<Product_Class.Product> p = JsonConvert.DeserializeObject<List<Product_Class.Product>>(File.ReadAllText(@"products.json", Encoding.UTF8));
                 Product_Class.ProductsList = p;
             }
             catch
@@ -65,8 +65,9 @@ namespace Price_Tag
             List<Product_Class.Product> products = new List<Product_Class.Product>();
             products.Add(P1);
             products.Add(P2);
-            File.WriteAllText(@"F:\PetProjects\Price_Tag\products.json", JsonConvert.SerializeObject(products, Formatting.Indented)); 
+            File.WriteAllText(@"products.json", JsonConvert.SerializeObject(products, Formatting.Indented));
             */
+            
         }
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
