@@ -59,7 +59,7 @@ namespace Price_Tag.Pages
                 currentProduct.ProductType = RB1.IsChecked == true ? "Цена за шт." : "Цена за кг.";
                 currentProduct.ProductBarcode = ProductBarcodeTB.Text;
                 Product_Class.ProductsList.Add(currentProduct);
-                File.WriteAllText(@"E:\PetProjects\Price_Tag\products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
+                File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
                 MessageBox.Show("Продукт добавлен!");
             }
             else
@@ -70,7 +70,7 @@ namespace Price_Tag.Pages
                 currentProduct.ProductType = RB1.IsChecked == true ? "Цена за шт." : "Цена за кг.";
                 currentProduct.ProductBarcode = ProductBarcodeTB.Text;
                 Product_Class.ProductsList[index] = currentProduct;
-                File.WriteAllText(@"E:\PetProjects\Price_Tag\products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
+                File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
                 MessageBox.Show("Продукт изменен!");
             }
         }
