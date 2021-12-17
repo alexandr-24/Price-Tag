@@ -112,7 +112,6 @@ namespace Price_Tag.Pages
                     lines.Add(Convert.ToString(n));
                     n += (char)1;
                 }
-                n -= (char)1;
                 var firstLine = lines;
                 CB.ItemsSource = firstLine;
             }
