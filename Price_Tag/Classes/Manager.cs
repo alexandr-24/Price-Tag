@@ -16,6 +16,7 @@ namespace Price_Tag.Classes
         }
         public static Settings SettingsData { get; set; }
         public static Frame MainFrame { get; set; }
+        public static Frame ImportFrame { get; set; }
 
         
     }

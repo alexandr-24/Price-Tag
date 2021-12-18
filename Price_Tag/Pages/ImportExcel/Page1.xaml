@@ -9,6 +9,37 @@
       Title="Page1">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Excel файл:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10"/>
+        <TextBox x:Name="FileStreamTB" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,10,60,10" IsReadOnly="True" FontSize="16"/>
+        <Button x:Name="SelectFileStreamButton" Style="{StaticResource ControlButtonStyle}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="24" FontFamily="Comic Sans MS" Margin="10,10" MinWidth="37" MinHeight="37" Click="SelectFileStreamButton_Click">
+            <StackPanel>
+                <Image Source="../../Icons/Folder.png" StretchDirection="DownOnly" Width="30" Height="30"/>
+            </StackPanel>
+        </Button>
         
+        <Label Content="Первая строка - название столбца:" FontSize="20" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        <CheckBox x:Name="FirstLineIsNameCB" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        
+        <Button x:Name="NextButton" Style="{StaticResource ControlButtonStyle}" Grid.Row="4" Margin="10,10" Click="NextButton_Click">
+            <Button.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.LayoutTransform>
+            <StackPanel>
+                <Image Source="../../Icons/Back.png" StretchDirection="DownOnly"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Page>

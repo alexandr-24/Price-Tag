@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Price_Tag.Classes;
+using IronXL;
 
 namespace Price_Tag.Pages.ImportExcel
 {
@@ -23,6 +26,34 @@ namespace Price_Tag.Pages.ImportExcel
         public Page1()
         {
             InitializeComponent();
+        }
+
+        private void SelectFileStreamButton_Click(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.Filters.Add(new CommonFileDialogFilter("Excel", "*.xls;*.xlsx"));
+            dialog.Multiselect = false;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                string stream = dialog.FileName;
+                stream.Replace("/", @"\");
+                FileStreamTB.Text = stream;
+            }
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            bool isOK = true;
+            try
+            {
+                WorkBook workbook = WorkBook.Load(FileStreamTB.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                isOK = false;
+            }
+            if (isOK) Manager.ImportFrame.Content = new Page2(FileStreamTB.Text, FirstLineIsNameCB.IsChecked == true ? true : false);
         }
     }
 }

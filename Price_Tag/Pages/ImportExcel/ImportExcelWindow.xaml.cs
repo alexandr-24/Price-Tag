@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Price_Tag.Classes;
 
 namespace Price_Tag.Pages.ImportExcel
 {
@@ -22,6 +23,8 @@ namespace Price_Tag.Pages.ImportExcel
         public ImportExcelWindow()
         {
             InitializeComponent();
+            Manager.ImportFrame = ImportFrame;
+            Manager.ImportFrame.Content = new Page1();
         }
     }
 }

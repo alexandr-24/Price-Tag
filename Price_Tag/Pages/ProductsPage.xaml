@@ -21,8 +21,6 @@
         </Grid.RowDefinitions>
         <Label Content="Товары" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3"/>
 
-        <ComboBox x:Name="CB"/>
-
         <DataGrid x:Name="DG" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="10,10" FontSize="18" FontFamily="Comic Sans MS" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn FontFamily="Comic Sans MS" FontSize="16" Header="Код" Binding="{Binding ID}"/>
