@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Price_Tag.Pages.ImportExcel"
         mc:Ignorable="d"
-        Title="Импорт продуктов через Excel" Height="400" MinHeight="400" MaxHeight="400" Width="400" MinWidth="400" MaxWidth="400">
+        Title="Импорт продуктов через Excel" Height="500" MinHeight="500" MaxHeight="500" Width="500" MinWidth="500" MaxWidth="500">
     <Grid>
         <Frame x:Name="ImportFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

@@ -35,7 +35,6 @@ namespace Price_Tag
             InitializeComponent();
             Manager.MainFrame = MainFrame;
             Manager.MainFrame.Content = new HomePage();
-
             // Загрузка названия компании и путь к сохранению файла
             try
             {

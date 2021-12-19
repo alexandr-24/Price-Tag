@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Price_Tag.Classes;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Price_Tag.Pages.ImportExcel
 {
@@ -22,13 +24,17 @@ namespace Price_Tag.Pages.ImportExcel
     /// </summary>
     public partial class Page2 : Page
     {
+        private bool FirstLineIsColumnN;
+        WorkBook workbook;
+        WorkSheet sheet;
         public Page2(string ExcelPath, bool FirstLineIsColumnName)
         {
             InitializeComponent();
+            FirstLineIsColumnN = FirstLineIsColumnName;
             try
             {
-                WorkBook workbook = WorkBook.Load(ExcelPath);
-                WorkSheet sheet = workbook.WorkSheets.First();
+                workbook = WorkBook.Load(ExcelPath);
+                sheet = workbook.WorkSheets.First();
                 // Загрузка первой строки в ComboBox
                 if (FirstLineIsColumnName == true)
                 {
@@ -65,6 +71,49 @@ namespace Price_Tag.Pages.ImportExcel
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int i;
+
+            char CodeChar;
+            char NameChar;
+            char CostChar;
+            char TypeChar;
+            char BarcodeChar;
+
+            if (FirstLineIsColumnN == true)
+            {
+                i = 2;
+                CodeChar = Convert.ToChar('A' + CodeCB.SelectedIndex);
+                NameChar = Convert.ToChar('A' + NameCB.SelectedIndex);
+                CostChar = Convert.ToChar('A' + CostCB.SelectedIndex);
+                TypeChar = Convert.ToChar('A' + TypeCB.SelectedIndex);
+                BarcodeChar = Convert.ToChar('A' + BarcodeCB.SelectedIndex);
+            }
+            else
+            {
+                i = 1;
+                CodeChar = Convert.ToChar(CodeCB.SelectedItem);
+                NameChar = Convert.ToChar(NameCB.SelectedItem);
+                CostChar = Convert.ToChar(CostCB.SelectedItem);
+                TypeChar = Convert.ToChar(TypeCB.SelectedItem);
+                BarcodeChar = Convert.ToChar(BarcodeCB.SelectedItem);
+            }
+            while (sheet["A" + Convert.ToString(i)].StringValue != "")
+            {
+                Product_Class.Product product = new Product_Class.Product();
+                product.ID = Convert.ToInt32(sheet[Convert.ToString(CodeChar) + Convert.ToString(i)].StringValue);
+                product.ProductName = sheet[Convert.ToString(NameChar) + Convert.ToString(i)].StringValue;
+                product.ProductCost = sheet[Convert.ToString(CostChar) + Convert.ToString(i)].StringValue;
+                product.ProductType = sheet[Convert.ToString(TypeChar) + Convert.ToString(i)].StringValue;
+                product.ProductBarcode = sheet[Convert.ToString(BarcodeChar) + Convert.ToString(i)].StringValue;
+                Product_Class.ProductsList.Add(product);
+                i++;
+            }
+            File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
+            MessageBox.Show("Импорт прошел успешно!");
         }
     }
 }

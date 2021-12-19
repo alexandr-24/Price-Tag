@@ -34,6 +34,7 @@ namespace Price_Tag.Pages
         }
         private void UpdateDG()
         {
+            DG.ItemsSource = null;
             DG.ItemsSource = Product_Class.ProductsList.ToList();
         }
 
@@ -58,10 +59,9 @@ namespace Price_Tag.Pages
                     {
                         Product_Class.ProductsList.Remove(productsToRemove[i]);
                     }
-                    File.WriteAllText(@"F:\PetProjects\Price_Tag\products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
+                    File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
                     UpdateDG();
                     MessageBox.Show("Продукты удалены!");
-
                 }
                 catch (Exception ex)
                 {
@@ -75,6 +75,7 @@ namespace Price_Tag.Pages
             ImportExcelWindow window = new ImportExcelWindow();
             window.Owner = Application.Current.MainWindow;
             window.ShowDialog();
+            UpdateDG();
         }
     }
 }

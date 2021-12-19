@@ -35,7 +35,8 @@ namespace Price_Tag.Pages
                 currentProduct = product;
                 if (currentProduct.ProductType == "Цена за шт.")
                     RB1.IsChecked = true;
-                else RB2.IsChecked = true;
+                else if (currentProduct.ProductType == "Цена за кг.")
+                    RB2.IsChecked = true;
                 ProductIdTB.IsEnabled = false;
                 index = Product_Class.ProductsList.FindIndex(x => x.ID == product.ID);
             }
