@@ -101,19 +101,26 @@ namespace Price_Tag.Pages.ImportExcel
                 TypeChar = Convert.ToChar(TypeCB.SelectedItem);
                 BarcodeChar = Convert.ToChar(BarcodeCB.SelectedItem);
             }
-            while (sheet["A" + Convert.ToString(i)].StringValue != "")
+            try
             {
-                Product_Class.Product product = new Product_Class.Product();
-                product.ID = Convert.ToInt32(sheet[Convert.ToString(CodeChar) + Convert.ToString(i)].StringValue);
-                product.ProductName = sheet[Convert.ToString(NameChar) + Convert.ToString(i)].StringValue;
-                product.ProductCost = sheet[Convert.ToString(CostChar) + Convert.ToString(i)].StringValue;
-                product.ProductType = sheet[Convert.ToString(TypeChar) + Convert.ToString(i)].StringValue;
-                product.ProductBarcode = sheet[Convert.ToString(BarcodeChar) + Convert.ToString(i)].StringValue;
-                Product_Class.ProductsList.Add(product);
-                i++;
+                while (sheet["A" + Convert.ToString(i)].StringValue != "")
+                {
+                    Product_Class.Product product = new Product_Class.Product();
+                    product.ID = Convert.ToInt32(sheet[Convert.ToString(CodeChar) + Convert.ToString(i)].StringValue);
+                    product.ProductName = sheet[Convert.ToString(NameChar) + Convert.ToString(i)].StringValue;
+                    product.ProductCost = sheet[Convert.ToString(CostChar) + Convert.ToString(i)].StringValue;
+                    product.ProductType = sheet[Convert.ToString(TypeChar) + Convert.ToString(i)].StringValue;
+                    product.ProductBarcode = sheet[Convert.ToString(BarcodeChar) + Convert.ToString(i)].StringValue;
+                    Product_Class.ProductsList.Add(product);
+                    i++;
+                }
+                File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
+                MessageBox.Show("Импорт прошел успешно!");
             }
-            File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
-            MessageBox.Show("Импорт прошел успешно!");
+            catch (ArgumentException)
+            {
+                MessageBox.Show("Не все столбцы сопоставлены!");
+            }
         }
     }
 }

@@ -9,6 +9,6 @@
       Title="HomePage">
 
     <Grid>
-        <Label Content="HOME PAGE" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="PRICE TAG" FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

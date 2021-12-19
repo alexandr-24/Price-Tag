@@ -134,10 +134,15 @@ namespace Price_Tag.Pages
                             cb.Stroke();
 
                             BarcodeEAN codeEAN = new BarcodeEAN();
+                            if (Convert.ToString(productsToPrintsList[r].ProductBarcode).Length == 13) 
+                                codeEAN.CodeType = Barcode.EAN13;
+                            else codeEAN.CodeType = Barcode.EAN8;
                             codeEAN.Code = Convert.ToString(productsToPrintsList[r].ProductBarcode);
 
                             iTextSharp.text.Image barcode = codeEAN.CreateImageWithBarcode(cb, null, null);
-                            barcode.SetAbsolutePosition(208 * i + 65, document.PageSize.Height - 155 - 166 * k);
+                            if (Convert.ToString(productsToPrintsList[r].ProductBarcode).Length == 13)
+                                barcode.SetAbsolutePosition(208 * i + 65, document.PageSize.Height - 155 - 166 * k);
+                            else barcode.SetAbsolutePosition(208 * i + 85, document.PageSize.Height - 155 - 166 * k);
                             document.Add(barcode);
 
                             cb.SetFontAndSize(bf, 10);

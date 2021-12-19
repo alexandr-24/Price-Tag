@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Price_Tag.Pages.ImportExcel"
       mc:Ignorable="d" 
-      d:DesignHeight="484" d:DesignWidth="500"
+      d:DesignHeight="484" d:DesignWidth="600"
       Title="Page2">
 
     <Grid>
