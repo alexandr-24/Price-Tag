@@ -14,6 +14,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Price_Tag.Classes;
+using System.Threading;
+
+
+using Excel = Microsoft.Office.Interop.Excel;
+
 using IronXL;
 
 namespace Price_Tag.Pages.ImportExcel
@@ -46,14 +51,23 @@ namespace Price_Tag.Pages.ImportExcel
             bool isOK = true;
             try
             {
-                WorkBook workbook = WorkBook.Load(FileStreamTB.Text);
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(FileStreamTB.Text);
+                xlWorkbook.Close();
+                xlApp.Workbooks.Close();
+                xlApp.Quit();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 isOK = false;
             }
-            if (isOK) Manager.ImportFrame.Content = new Page2(FileStreamTB.Text, FirstLineIsNameCB.IsChecked == true ? true : false);
+            if (isOK) 
+            {
+                Rect.Visibility = Visibility.Visible;
+                GifImg.Visibility = Visibility.Visible;
+                Manager.ImportFrame.Content = new Page2(FileStreamTB.Text, FirstLineIsNameCB.IsChecked == true ? true : false);
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Price_Tag.Classes;
 using Newtonsoft.Json;
 using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Price_Tag.Pages.ImportExcel
 {
@@ -25,47 +26,49 @@ namespace Price_Tag.Pages.ImportExcel
     public partial class Page2 : Page
     {
         private bool FirstLineIsColumnN;
-        WorkBook workbook;
-        WorkSheet sheet;
+
+        private Excel.Application xlApp;
+        private Excel.Workbook xlWorkbook;
+        private Excel._Worksheet xlWorksheet;
+        private Excel.Range xlRange;
+
         public Page2(string ExcelPath, bool FirstLineIsColumnName)
         {
             InitializeComponent();
             FirstLineIsColumnN = FirstLineIsColumnName;
             try
             {
-                workbook = WorkBook.Load(ExcelPath);
-                sheet = workbook.WorkSheets.First();
-                // Загрузка первой строки в ComboBox
+                xlApp = new Excel.Application();
+                xlWorkbook = xlApp.Workbooks.Open(ExcelPath);
+                xlWorksheet = xlWorkbook.Sheets[1];
+                xlRange = xlWorksheet.UsedRange;
+
+                List<string> list = new List<string>();
                 if (FirstLineIsColumnName == true)
                 {
-                    char n = 'A';
-                    while (sheet[Convert.ToString(n) + Convert.ToString(1)].StringValue != "")
+                    int i = 1;
+                    while(xlRange.Cells[1, i] != null && xlRange.Cells[1, i].Value2 != null)
                     {
-                        n += (char)1;
+                        list.Add (xlRange.Cells[1, i].Value2.ToString());
+                        i++;
                     }
-                    n -= (char)1;
-                    var firstLine = sheet["A1:" + Convert.ToString(n) + "1"].ToList();
-                    CodeCB.ItemsSource = firstLine;
-                    NameCB.ItemsSource = firstLine;
-                    CostCB.ItemsSource = firstLine;
-                    TypeCB.ItemsSource = firstLine;
-                    BarcodeCB.ItemsSource = firstLine;
                 }
                 else
                 {
+                    int i = 1;
                     char n = 'A';
-                    List<string> lines = new List<string>();
-                    while (sheet[Convert.ToString(n) + Convert.ToString(1)].StringValue != "")
+                    while (xlRange.Cells[1, i] != null && xlRange.Cells[1, i].Value2 != null)
                     {
-                        lines.Add(Convert.ToString(n));
+                        list.Add(Convert.ToString(n));
                         n += (char)1;
+                        i++;
                     }
-                    CodeCB.ItemsSource = lines;
-                    NameCB.ItemsSource = lines;
-                    CostCB.ItemsSource = lines;
-                    TypeCB.ItemsSource = lines;
-                    BarcodeCB.ItemsSource = lines;
                 }
+                CodeCB.ItemsSource = list;
+                NameCB.ItemsSource = list;
+                CostCB.ItemsSource = list;
+                TypeCB.ItemsSource = list;
+                BarcodeCB.ItemsSource = list;
             }
             catch (Exception ex)
             {
@@ -77,49 +80,57 @@ namespace Price_Tag.Pages.ImportExcel
         {
             int i;
 
-            char CodeChar;
-            char NameChar;
-            char CostChar;
-            char TypeChar;
-            char BarcodeChar;
+            int CodeChar;
+            int NameChar;
+            int CostChar;
+            int TypeChar;
+            int BarcodeChar;
 
             if (FirstLineIsColumnN == true)
             {
                 i = 2;
-                CodeChar = Convert.ToChar('A' + CodeCB.SelectedIndex);
-                NameChar = Convert.ToChar('A' + NameCB.SelectedIndex);
-                CostChar = Convert.ToChar('A' + CostCB.SelectedIndex);
-                TypeChar = Convert.ToChar('A' + TypeCB.SelectedIndex);
-                BarcodeChar = Convert.ToChar('A' + BarcodeCB.SelectedIndex);
+                CodeChar = Convert.ToInt32(CodeCB.SelectedIndex + 1);
+                NameChar = Convert.ToInt32(NameCB.SelectedIndex + 1);
+                CostChar = Convert.ToInt32(CostCB.SelectedIndex + 1);
+                TypeChar = Convert.ToInt32(TypeCB.SelectedIndex + 1);
+                BarcodeChar = Convert.ToInt32(BarcodeCB.SelectedIndex + 1);
             }
             else
             {
                 i = 1;
-                CodeChar = Convert.ToChar(CodeCB.SelectedItem);
-                NameChar = Convert.ToChar(NameCB.SelectedItem);
-                CostChar = Convert.ToChar(CostCB.SelectedItem);
-                TypeChar = Convert.ToChar(TypeCB.SelectedItem);
-                BarcodeChar = Convert.ToChar(BarcodeCB.SelectedItem);
+                CodeChar = Convert.ToInt32(Convert.ToChar(CodeCB.SelectedItem) - Convert.ToChar('A')) + 1;
+                NameChar = Convert.ToInt32(Convert.ToChar(NameCB.SelectedItem) - Convert.ToChar('A')) + 1;
+                CostChar = Convert.ToInt32(Convert.ToChar(CostCB.SelectedItem) - Convert.ToChar('A')) + 1;
+                TypeChar = Convert.ToInt32(Convert.ToChar(TypeCB.SelectedItem) - Convert.ToChar('A')) + 1;
+                BarcodeChar = Convert.ToInt32(Convert.ToChar(BarcodeCB.SelectedItem) - Convert.ToChar('A')) + 1;
             }
             try
             {
-                while (sheet["A" + Convert.ToString(i)].StringValue != "")
+                while (xlRange.Cells[NameChar, i + 1] != null && xlRange.Cells[NameChar, i + 1].Value2 != null)
                 {
                     Product_Class.Product product = new Product_Class.Product();
-                    product.ID = Convert.ToInt32(sheet[Convert.ToString(CodeChar) + Convert.ToString(i)].StringValue);
-                    product.ProductName = sheet[Convert.ToString(NameChar) + Convert.ToString(i)].StringValue;
-                    product.ProductCost = sheet[Convert.ToString(CostChar) + Convert.ToString(i)].StringValue;
-                    product.ProductType = sheet[Convert.ToString(TypeChar) + Convert.ToString(i)].StringValue;
-                    product.ProductBarcode = sheet[Convert.ToString(BarcodeChar) + Convert.ToString(i)].StringValue;
+                    product.ID = Convert.ToInt32(xlRange.Cells[i, CodeChar].Value2);
+                    product.ProductName = xlRange.Cells[i, NameChar].Value2;
+                    product.ProductCost = Convert.ToString (xlRange.Cells[i, CostChar].Value2);
+                    product.ProductType = xlRange.Cells[i, TypeChar].Value2;
+                    product.ProductBarcode = Convert.ToString (xlRange.Cells[i, BarcodeChar].Value2);
                     Product_Class.ProductsList.Add(product);
                     i++;
                 }
                 File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
                 MessageBox.Show("Импорт прошел успешно!");
+                xlWorkbook.Close(false);
+                xlApp.Workbooks.Close();
+                xlApp.Quit();
+
             }
             catch (ArgumentException)
             {
                 MessageBox.Show("Не все столбцы сопоставлены!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

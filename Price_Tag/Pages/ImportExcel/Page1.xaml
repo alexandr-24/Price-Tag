@@ -6,8 +6,9 @@
       xmlns:local="clr-namespace:Price_Tag.Pages.ImportExcel"
       mc:Ignorable="d" 
       d:DesignHeight="484" d:DesignWidth="600"
-      Title="Page1">
-
+      Title="Page1"
+      xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif">
+        
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -45,5 +46,9 @@
                 <Image Source="../../Icons/Back.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
+
+        <Rectangle x:Name="Rect" Grid.RowSpan="6" Fill="White" Opacity="0.7" Visibility="Hidden"/>
+        <Image x:Name="GifImg" gif:AnimationBehavior.SourceUri="/Icons/Loading.gif" Grid.RowSpan="6" StretchDirection="DownOnly" Panel.ZIndex="1" Width="100" Height="100" Visibility="Hidden"/>
+
     </Grid>
 </Page>
