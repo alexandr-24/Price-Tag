@@ -89,6 +89,10 @@ namespace Price_Tag
             Grid.SetRow(SelectedButtonFrame, 3);
         }
 
-        
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Content = new InfoPage();
+            Grid.SetRow(SelectedButtonFrame, 5);
+        }
     }
 }
