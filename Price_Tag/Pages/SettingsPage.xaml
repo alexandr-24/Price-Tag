@@ -10,24 +10,25 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Content="Настройки" FontSize="38" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10"/>
+        <Label Content="Настройки" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
 
-        <Label Content="Название предпиятия:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10"/>
-        <TextBox x:Name="CompanyNameTB" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,10"/>
-        <Label Content="Путь сохранения файлов:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10"/>
-        <TextBox x:Name="FileStreamTB" Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,10,60,10" IsReadOnly="True"/>
-        <Button x:Name="SelectFileStreamButton" Style="{StaticResource ControlButtonStyle}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="24" FontFamily="Comic Sans MS" Margin="10,10" MinWidth="37" MinHeight="37" Click="SelectFileStreamButton_Click">
+        <Label Content="Название предпиятия:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10"/>
+        <TextBox x:Name="CompanyNameTB" Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,10"/>
+        <Label Content="Путь сохранения файлов:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10"/>
+        <TextBox x:Name="FileStreamTB" Grid.Row="3" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,10,60,10" IsReadOnly="True"/>
+        <Button x:Name="SelectFileStreamButton" Style="{StaticResource ControlButtonStyle}" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="24" FontFamily="Comic Sans MS" Margin="10,10" MinWidth="37" MinHeight="37" Click="SelectFileStreamButton_Click">
             <StackPanel>
                 <Image Source="../Icons/Folder.png" StretchDirection="DownOnly" Width="30" Height="30"/>
             </StackPanel>
         </Button>
-        <Button x:Name="SaveButton" Style="{StaticResource ControlButtonStyle}" Grid.Row="3" Grid.Column="0" FontSize="24" FontFamily="Comic Sans MS" VerticalAlignment="Center" Margin="10,10" Click="SaveButton_Click">
+        <Button x:Name="SaveButton" Style="{StaticResource ControlButtonStyle}" Grid.Row="4" Grid.Column="0" FontSize="24" FontFamily="Comic Sans MS" VerticalAlignment="Center" Margin="10,10" Click="SaveButton_Click">
             <StackPanel>
                 <Image Source="../Icons/Save.png" StretchDirection="DownOnly" Width="48" Height="48"/>
             </StackPanel>

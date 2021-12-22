@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,27 +53,70 @@ namespace Price_Tag.Pages
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (isAdd == true)
+            try
             {
-                currentProduct.ID = Convert.ToInt32 (ProductIdTB.Text);
-                currentProduct.ProductName = ProductNameTB.Text;
-                currentProduct.ProductCost = ProductCostTB.Text;
-                currentProduct.ProductType = RB1.IsChecked == true ? "Цена за шт." : "Цена за кг.";
-                currentProduct.ProductBarcode = ProductBarcodeTB.Text;
-                Product_Class.ProductsList.Add(currentProduct);
-                File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
-                MessageBox.Show("Продукт добавлен!");
+                // Проверка корректность данных
+                string errors = "";
+
+                // Код
+                if (ProductIdTB.Text.Any(char.IsLetter) || ProductIdTB.Text.Length == 0)
+                {
+                    errors += "Код продукта указан не корректно!\n";
+                }
+                // Название
+                if (ProductNameTB.Text.Trim().Length == 0)
+                {
+                    errors += "Введите название продукта!\n";
+                }
+                // Цена
+                if (ProductCostTB.Text.Any(char.IsLetter) || ProductCostTB.Text.Length == 0)
+                {
+                    errors += "Цена указана некорректно!\n";
+                }
+                // Тип товара
+                if (RB1.IsChecked == false && RB2.IsChecked == false)
+                {
+                    errors += "Выберете тип товара!\n";
+                }
+                // Штрих-код
+                if (ProductBarcodeTB.Text.Any(char.IsLetter) || (ProductBarcodeTB.Text.Length != 8 && ProductBarcodeTB.Text.Length != 13))
+                {
+                    errors += "Штрих-код указан некорректно!";
+                }
+                // Вывод ошибок
+                if (errors.Length > 0)
+                {
+                    MessageBox.Show(errors);
+                }
+                else
+                {
+                    if (isAdd == true)
+                    {
+                        currentProduct.ID = Convert.ToInt32(ProductIdTB.Text);
+                        currentProduct.ProductName = ProductNameTB.Text;
+                        currentProduct.ProductCost = ProductCostTB.Text;
+                        currentProduct.ProductType = RB1.IsChecked == true ? "Цена за шт." : "Цена за кг.";
+                        currentProduct.ProductBarcode = ProductBarcodeTB.Text;
+                        Product_Class.ProductsList.Add(currentProduct);
+                        File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
+                        MessageBox.Show("Продукт добавлен!");
+                    }
+                    else
+                    {
+                        currentProduct.ID = Convert.ToInt32(ProductIdTB.Text);
+                        currentProduct.ProductName = ProductNameTB.Text;
+                        currentProduct.ProductCost = ProductCostTB.Text;
+                        currentProduct.ProductType = RB1.IsChecked == true ? "Цена за шт." : "Цена за кг.";
+                        currentProduct.ProductBarcode = ProductBarcodeTB.Text;
+                        Product_Class.ProductsList[index] = currentProduct;
+                        File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
+                        MessageBox.Show("Продукт изменен!");
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                currentProduct.ID = Convert.ToInt32(ProductIdTB.Text);
-                currentProduct.ProductName = ProductNameTB.Text;
-                currentProduct.ProductCost = ProductCostTB.Text;
-                currentProduct.ProductType = RB1.IsChecked == true ? "Цена за шт." : "Цена за кг.";
-                currentProduct.ProductBarcode = ProductBarcodeTB.Text;
-                Product_Class.ProductsList[index] = currentProduct;
-                File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
-                MessageBox.Show("Продукт изменен!");
+                MessageBox.Show(ex.Message);
             }
         }
     }
