@@ -52,21 +52,10 @@ namespace Price_Tag
                 List<Product_Class.Product> p = JsonConvert.DeserializeObject<List<Product_Class.Product>>(File.ReadAllText(@"products.json", Encoding.UTF8));
                 Product_Class.ProductsList = p;
             }
-            catch
+            catch (Exception ex)
             {
-
-            }
-
-            /* Загрузка продуктов
-            Product_Class.Product P1 = new Product_Class.Product { ID = 1, ProductBarcode = "7622201105518", ProductCost = "139.00", ProductName = "Конфеты Milka, из молочного шоколада, с ореховой начинкой, 110 г", ProductType = "Цена за шт." };
-            Product_Class.Product P2 = new Product_Class.Product { ID = 2, ProductBarcode = "3858888677633", ProductCost = "50.00", ProductName = "Мороженое Бон Пари Джангли банан 45 мл", ProductType = "Цена за шт." };
-
-            List<Product_Class.Product> products = new List<Product_Class.Product>();
-            products.Add(P1);
-            products.Add(P2);
-            File.WriteAllText(@"products.json", JsonConvert.SerializeObject(products, Formatting.Indented));
-            */
-            
+                MessageBox.Show(ex.Message);
+            }            
         }
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {

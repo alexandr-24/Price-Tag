@@ -17,7 +17,6 @@ namespace Price_Tag.Classes
         public static Settings SettingsData { get; set; }
         public static Frame MainFrame { get; set; }
         public static Frame ImportFrame { get; set; }
-
-        
+        public static Pages.ImportExcel.Page2 ImportPage2 { get; set; }       
     }
 }

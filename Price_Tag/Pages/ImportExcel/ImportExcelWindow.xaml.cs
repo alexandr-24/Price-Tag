@@ -20,11 +20,20 @@ namespace Price_Tag.Pages.ImportExcel
     /// </summary>
     public partial class ImportExcelWindow : Window
     {
+        Page2 page2;
         public ImportExcelWindow()
         {
             InitializeComponent();
             Manager.ImportFrame = ImportFrame;
             Manager.ImportFrame.Content = new Page1();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Manager.ImportPage2 != null)
+            {
+                Manager.ImportPage2.CloseExcel();
+            }
         }
     }
 }

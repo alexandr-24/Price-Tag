@@ -35,6 +35,7 @@ namespace Price_Tag.Pages.ImportExcel
         public Page2(string ExcelPath, bool FirstLineIsColumnName)
         {
             InitializeComponent();
+            Manager.ImportPage2 = this;
             FirstLineIsColumnN = FirstLineIsColumnName;
             try
             {
@@ -118,20 +119,17 @@ namespace Price_Tag.Pages.ImportExcel
                     i++;
                 }
                 File.WriteAllText(@"products.json", JsonConvert.SerializeObject(Product_Class.ProductsList, Formatting.Indented));
-                MessageBox.Show("Импорт прошел успешно!");
-                xlWorkbook.Close(false);
-                xlApp.Workbooks.Close();
-                xlApp.Quit();
-
-            }
-            catch (ArgumentException)
-            {
-                MessageBox.Show("Не все столбцы сопоставлены!");
+                MessageBox.Show("Импорт прошёл успешно!");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        public void CloseExcel()
+        {
+            xlWorkbook.Close(false, null, null);
+            xlApp.Quit();
         }
     }
 }

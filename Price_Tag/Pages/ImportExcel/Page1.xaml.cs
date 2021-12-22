@@ -53,8 +53,7 @@ namespace Price_Tag.Pages.ImportExcel
             {
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(FileStreamTB.Text);
-                xlWorkbook.Close();
-                xlApp.Workbooks.Close();
+                xlWorkbook.Close(false, null, null);
                 xlApp.Quit();
             }
             catch (Exception ex)
@@ -64,8 +63,10 @@ namespace Price_Tag.Pages.ImportExcel
             }
             if (isOK) 
             {
+                // Анимация загрузки не работает - не получается реализовать многопоточность
                 Rect.Visibility = Visibility.Visible;
                 GifImg.Visibility = Visibility.Visible;
+
                 Manager.ImportFrame.Content = new Page2(FileStreamTB.Text, FirstLineIsNameCB.IsChecked == true ? true : false);
             }
         }
