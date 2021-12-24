@@ -168,6 +168,10 @@ namespace Price_Tag.Pages
                                     lastEnter++;
                                 }
                             }
+                            else
+                            {
+                                line1 = productsToPrintsList[r].ProductName;
+                            }
 
                             cb.ShowTextAligned(1, line1, 208 * i + 110, document.PageSize.Height - 35 - 166 * k, 0);
                             cb.ShowTextAligned(1, line2, 208 * i + 110, document.PageSize.Height - 50 - 166 * k, 0);
