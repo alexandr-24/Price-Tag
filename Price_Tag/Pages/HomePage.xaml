@@ -9,6 +9,18 @@
       Title="HomePage">
 
     <Grid>
-        <Label Content="PRICE TAG" FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Label Content="PRICE TAG" FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0"/>
+        <Label Content="— Добавьте или импортируйте из Excel товары" Grid.Row="1" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
+        <Label Content="— Печать ценников" Grid.Row="2" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
+        <Label Content="— Настройте название компании и куда будут сохраняться ценники" Grid.Row="3" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
+        <Label Content="— Информация о приложении" Grid.Row="5" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0" Visibility="Hidden"/>
     </Grid>
 </Page>

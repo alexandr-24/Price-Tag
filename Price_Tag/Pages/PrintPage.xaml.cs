@@ -90,7 +90,14 @@ namespace Price_Tag.Pages
                     }
                 }
             }
-            Print(products);
+            if (products.Count > 0)
+            {
+                Print(products);
+            }
+            else
+            {
+                MessageBox.Show("Товары не выбраны!");
+            }
             LoadProductsList();
             updateDG();
         }

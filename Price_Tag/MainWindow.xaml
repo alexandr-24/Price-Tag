@@ -42,7 +42,7 @@
                 <Image Source="Icons/Settings.png" StretchDirection="DownOnly"/>
             </StackPanel>
         </Button>
-        <Button x:Name="InfoButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="6" Grid.Column="0" Click="InfoButton_Click">
+        <Button x:Name="InfoButton" Style="{StaticResource MenuButtonStyle}" Grid.Row="6" Grid.Column="0" Click="InfoButton_Click" Visibility="Hidden">
             <StackPanel>
                 <Image Source="Icons/Info.png" StretchDirection="DownOnly"/>
             </StackPanel>
