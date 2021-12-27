@@ -69,7 +69,7 @@ namespace Price_Tag.Pages
                     errors += "Введите название продукта!\n";
                 }
                 // Цена
-                if (ProductCostTB.Text.Any(char.IsLetter) || ProductCostTB.Text.Length == 0)
+                if (ProductCostTB.Text.Any(char.IsLetter) || ProductCostTB.Text.Length == 0 || Convert.ToDouble(ProductCostTB.Text) < 0)
                 {
                     errors += "Цена указана некорректно!\n";
                 }
@@ -79,7 +79,7 @@ namespace Price_Tag.Pages
                     errors += "Выберете тип товара!\n";
                 }
                 // Штрих-код
-                if (ProductBarcodeTB.Text.Any(char.IsLetter) || (ProductBarcodeTB.Text.Length != 8 && ProductBarcodeTB.Text.Length != 13))
+                if (!ProductBarcodeTB.Text.All(char.IsNumber) || (ProductBarcodeTB.Text.Length != 8 && ProductBarcodeTB.Text.Length != 13))
                 {
                     errors += "Штрих-код указан некорректно!";
                 }

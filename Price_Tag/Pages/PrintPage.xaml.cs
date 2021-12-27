@@ -103,101 +103,112 @@ namespace Price_Tag.Pages
         }
 
         private void Print(List<ProductsToPrint> productsToPrintsList)
-        {         
-            string stream = Manager.SettingsData.FileStreamString;
-            stream += "/" + DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + ".pdf";
-            stream.Replace("/", @"\");
-
-            int count = productsToPrintsList.Count;
-
-            // 595 X 842 - A4
-            // 208(4) X 166(5)
-            FileStream fileStream = File.Create(stream);
-            using (Document document = new Document(new iTextSharp.text.Rectangle(842, 595)))
+        {
+            try
             {
-                PdfWriter writer = PdfWriter.GetInstance(document, fileStream);
-                document.Open();
-                PdfContentByte cb = writer.DirectContent;
-
-                string ttf = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "ARIAL.TTF");
-                BaseFont bf = BaseFont.CreateFont(ttf, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-                cb.SetColorFill(BaseColor.BLACK);
-                cb.SetFontAndSize(bf, 8);
-
-                // Price tag
-                int r = 0;
-                while (r < count)
+                if (Manager.SettingsData.FileStreamString == "")
                 {
-                    if (r != 0) document.NewPage();
+                    throw new Exception("Не указан путь сохранения файлов!");
+                }
+                string stream = Manager.SettingsData.FileStreamString;
+                stream += "/" + DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + ".pdf";
+                stream.Replace("/", @"\");
+
+                int count = productsToPrintsList.Count;
+
+                // 595 X 842 - A4
+                // 208(4) X 166(5)
+                FileStream fileStream = File.Create(stream);
+                using (Document document = new Document(new iTextSharp.text.Rectangle(842, 595)))
+                {
+                    PdfWriter writer = PdfWriter.GetInstance(document, fileStream);
+                    document.Open();
+                    PdfContentByte cb = writer.DirectContent;
+
+                    string ttf = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "ARIAL.TTF");
+                    BaseFont bf = BaseFont.CreateFont(ttf, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
                     cb.SetColorFill(BaseColor.BLACK);
                     cb.SetFontAndSize(bf, 8);
-                    for (int i = 0; i <= 3; i++)
+
+                    // Price tag
+                    int r = 0;
+                    while (r < count)
                     {
-                        for (int k = 0; k <= 2; k++)
+                        if (r != 0) document.NewPage();
+                        cb.SetColorFill(BaseColor.BLACK);
+                        cb.SetFontAndSize(bf, 8);
+                        for (int i = 0; i <= 3; i++)
                         {
-                            if (r >= count) break;
-
-                            cb.Rectangle(5 + 208 * i, document.PageSize.Height - 5 - 166 * k, 208, -166);
-                            cb.Stroke();
-
-                            BarcodeEAN codeEAN = new BarcodeEAN();
-                            if (Convert.ToString(productsToPrintsList[r].ProductBarcode).Length == 13) 
-                                codeEAN.CodeType = Barcode.EAN13;
-                            else codeEAN.CodeType = Barcode.EAN8;
-                            codeEAN.Code = Convert.ToString(productsToPrintsList[r].ProductBarcode);
-
-                            iTextSharp.text.Image barcode = codeEAN.CreateImageWithBarcode(cb, null, null);
-                            if (Convert.ToString(productsToPrintsList[r].ProductBarcode).Length == 13)
-                                barcode.SetAbsolutePosition(208 * i + 65, document.PageSize.Height - 155 - 166 * k);
-                            else barcode.SetAbsolutePosition(208 * i + 85, document.PageSize.Height - 155 - 166 * k);
-                            document.Add(barcode);
-
-                            cb.SetFontAndSize(bf, 10);
-                            string line1 = "";
-                            string line2 = "";
-                            if (productsToPrintsList[r].ProductName.Length > 30)
+                            for (int k = 0; k <= 2; k++)
                             {
-                                int lastEnter = 0;
-                                for (int j = 0; j < 35; j++)
+                                if (r >= count) break;
+
+                                cb.Rectangle(5 + 208 * i, document.PageSize.Height - 5 - 166 * k, 208, -166);
+                                cb.Stroke();
+
+                                BarcodeEAN codeEAN = new BarcodeEAN();
+                                if (Convert.ToString(productsToPrintsList[r].ProductBarcode).Length == 13)
+                                    codeEAN.CodeType = Barcode.EAN13;
+                                else codeEAN.CodeType = Barcode.EAN8;
+                                codeEAN.Code = Convert.ToString(productsToPrintsList[r].ProductBarcode);
+
+                                iTextSharp.text.Image barcode = codeEAN.CreateImageWithBarcode(cb, null, null);
+                                if (Convert.ToString(productsToPrintsList[r].ProductBarcode).Length == 13)
+                                    barcode.SetAbsolutePosition(208 * i + 65, document.PageSize.Height - 155 - 166 * k);
+                                else barcode.SetAbsolutePosition(208 * i + 85, document.PageSize.Height - 155 - 166 * k);
+                                document.Add(barcode);
+
+                                cb.SetFontAndSize(bf, 10);
+                                string line1 = "";
+                                string line2 = "";
+                                if (productsToPrintsList[r].ProductName.Length > 30)
                                 {
-                                    if (productsToPrintsList[r].ProductName[j] == ' ')
+                                    int lastEnter = 0;
+                                    for (int j = 0; j < 35; j++)
                                     {
-                                        lastEnter = j;
+                                        if (productsToPrintsList[r].ProductName[j] == ' ')
+                                        {
+                                            lastEnter = j;
+                                        }
+                                    }
+                                    for (int j = 0; j < lastEnter; j++)
+                                    {
+                                        line1 += productsToPrintsList[r].ProductName[j];
+                                    }
+                                    while (lastEnter < productsToPrintsList[r].ProductName.Length)
+                                    {
+                                        line2 += productsToPrintsList[r].ProductName[lastEnter];
+                                        lastEnter++;
                                     }
                                 }
-                                for (int j = 0; j < lastEnter; j++)
+                                else
                                 {
-                                    line1 += productsToPrintsList[r].ProductName[j];
+                                    line1 = productsToPrintsList[r].ProductName;
                                 }
-                                while (lastEnter < productsToPrintsList[r].ProductName.Length)
-                                {
-                                    line2 += productsToPrintsList[r].ProductName[lastEnter];
-                                    lastEnter++;
-                                }
-                            }
-                            else
-                            {
-                                line1 = productsToPrintsList[r].ProductName;
-                            }
 
-                            cb.ShowTextAligned(1, line1, 208 * i + 110, document.PageSize.Height - 35 - 166 * k, 0);
-                            cb.ShowTextAligned(1, line2, 208 * i + 110, document.PageSize.Height - 50 - 166 * k, 0);
-                            cb.SetFontAndSize(bf, 24);
-                            cb.ShowTextAligned(1, productsToPrintsList[r].ProductCost + " руб.", 208 * i + 109, document.PageSize.Height - 83 - 166 * k, 0);
-                            cb.SetFontAndSize(bf, 8);
-                            cb.ShowTextAligned(1, productsToPrintsList[r].ProductType, 208 * i + 109, document.PageSize.Height - 100 - 166 * k, 0);
-                            cb.ShowTextAligned(0, Manager.SettingsData.CompanyName, 208 * i + 10, document.PageSize.Height - 15 - 166 * k, 0);
-                            cb.ShowTextAligned(1, "Код: " + productsToPrintsList[r].ID, 208 * i + 109, document.PageSize.Height - 163 - 166 * k, 0);
-                            cb.ShowTextAligned(1, System.DateTime.Now.ToString("dd.MM.yyyy"), 208 * i + 190, document.PageSize.Height - 15 - 166 * k, 0);
+                                cb.ShowTextAligned(1, line1, 208 * i + 110, document.PageSize.Height - 35 - 166 * k, 0);
+                                cb.ShowTextAligned(1, line2, 208 * i + 110, document.PageSize.Height - 50 - 166 * k, 0);
+                                cb.SetFontAndSize(bf, 24);
+                                cb.ShowTextAligned(1, productsToPrintsList[r].ProductCost + " руб.", 208 * i + 109, document.PageSize.Height - 83 - 166 * k, 0);
+                                cb.SetFontAndSize(bf, 8);
+                                cb.ShowTextAligned(1, productsToPrintsList[r].ProductType, 208 * i + 109, document.PageSize.Height - 100 - 166 * k, 0);
+                                cb.ShowTextAligned(0, Manager.SettingsData.CompanyName, 208 * i + 10, document.PageSize.Height - 15 - 166 * k, 0);
+                                cb.ShowTextAligned(1, "Код: " + productsToPrintsList[r].ID, 208 * i + 109, document.PageSize.Height - 163 - 166 * k, 0);
+                                cb.ShowTextAligned(1, System.DateTime.Now.ToString("dd.MM.yyyy"), 208 * i + 190, document.PageSize.Height - 15 - 166 * k, 0);
 
-                            r++;
+                                r++;
+                            }
+                            if (r >= count) break;
                         }
-                        if (r >= count) break;
                     }
+                    document.Close();
+                    MessageBox.Show("Ценники напечатаны!");
+                    Process.Start(Manager.SettingsData.FileStreamString);
                 }
-                document.Close();
-                MessageBox.Show("Ценники напечатаны!");
-                Process.Start(Manager.SettingsData.FileStreamString);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
