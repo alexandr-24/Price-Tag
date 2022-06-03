@@ -1,0 +1,16 @@
+[
+  {
+    "ID": 102,
+    "ProductName": "Мороженое Бон Пари Джангли банан 45 мл",
+    "ProductCost": "50.49",
+    "ProductType": "Цена за кг.",
+    "ProductBarcode": "3858888677633"
+  },
+  {
+    "ID": 103,
+    "ProductName": "Вода Bon Aqua, 0.5л",
+    "ProductCost": "48.00",
+    "ProductType": "Цена за шт.",
+    "ProductBarcode": "40822426"
+  }
+]
