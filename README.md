@@ -6,6 +6,7 @@
     1. [Добавление вручную](#Добавление-вручную)
     2. [Импорт из Excel](#Импорт-из-Excel)
 3. [Печать ценников](#Печать-ценников)
+4. [Скрины приложения](#Скрины-приложения)
 
 ## Настройки
 В настройки входит название предприятия и путь сохранения .pdf файлов. Хранение настроек реализовано через **.json**:
@@ -310,3 +311,39 @@ private void Print(List < ProductsToPrint > productsToPrintsList) {
       }
     }
 ```
+
+## Скрины приложения
+### Главная страница
+    
+![image](https://user-images.githubusercontent.com/71275256/174962840-f2a18d93-18ac-48b8-9b67-6677495b0a26.png)
+
+### Товары
+* **Все товары**
+    
+![image](https://user-images.githubusercontent.com/71275256/174962957-0d824350-db2d-4974-a4cc-b71c0be89422.png)
+
+* **Добавление товаров**
+
+![image](https://user-images.githubusercontent.com/71275256/174963108-d6b1e8ab-6542-43d1-ad57-0d3c8acc51a1.png)
+
+* **Изменение товаров**
+
+![image](https://user-images.githubusercontent.com/71275256/174963191-3a4dbb95-db55-4342-b0ee-ea97b26ffd54.png)
+
+* **Импорт из Excel**
+
+![image](https://user-images.githubusercontent.com/71275256/174963326-cbef3c39-d20b-4966-b6e9-ae568720fc25.png)
+![image](https://user-images.githubusercontent.com/71275256/174963548-482e48de-a0cb-4042-a188-5d098d23f057.png)
+![image](https://user-images.githubusercontent.com/71275256/174963504-50effe79-c4b5-4f0a-9a21-f0356a316db9.png)
+![image](https://user-images.githubusercontent.com/71275256/174963634-e703c548-1f13-445b-8d81-fa67cd037caf.png)
+    
+### Печать ценников
+    
+![image](https://user-images.githubusercontent.com/71275256/174963743-0ece9dbe-8e41-41ac-886b-dd964e05a54a.png)
+![image](https://user-images.githubusercontent.com/71275256/174963853-6121c4be-f79d-4a94-9ab7-09082dd6ed5c.png)
+![image](https://user-images.githubusercontent.com/71275256/174963953-bbec349f-8234-4e2d-a06b-d8683d146fb1.png)
+
+### Настройки
+    
+![image](https://user-images.githubusercontent.com/71275256/174964010-b462e42e-b92f-4a96-a804-5586f2f2e732.png)
+
